@@ -4,34 +4,41 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import type { User} from "../types/data";
+import type { User } from "../types/data";
 export const Login = () => {
-const navigate = useNavigate()
-    const API = "https://reqres.in/api/login"
-    const [email,setEmail]=useState("eve.holt@reqres.in")
-  const [password,setPassword]=useState("cityslicka")
-  const [checked,setChecked]=useState(false)
-  const handleSubmit=async (e :React.FormEvent)=>{
-      e.preventDefault();
+  const navigate = useNavigate();
+  const API = "https://reqres.in/api/login";
+
+  const [email, setEmail] = useState("eve.holt@reqres.in");
+  const [password, setPassword] = useState("cityslicka");
+  const [checked, setChecked] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
     const cred = {
-      email:email,
-      password : password
-    }
-   console.log("Submitting login:", cred);
-   
+      email: email,
+      password: password,
+    };
+    console.log("Submitting login:", cred);
 
     try {
-          const response = await axios.post<User>(API,cred) 
-          console.log("login succesfull",response.data)
-           alert("login succesfull")
-          localStorage.setItem("token", response.data.token);
-            navigate('/')
-    } catch (error) {
-        alert("login failed")
-    }
-  
+      // Bug fix = missing x-api-key to be abe to make this request, i have added it and it works now.
 
-  }
+      const response = await axios.post<User>(API, cred, {
+        headers: {
+          "Content-Type": "application/json",
+          "x-api-key": "reqres-free-v1",
+        },
+      });
+
+      console.log("login succesfull", response.data);
+      alert("login succesfull");
+      localStorage.setItem("token", response.data.token);
+      navigate("/");
+    } catch (error) {
+      alert("login failed " + error);
+    }
+  };
 
   return (
     <>
@@ -54,9 +61,9 @@ const navigate = useNavigate()
                 </h2>
                 <form onSubmit={handleSubmit}>
                   <div className="relative mb-6" data-twe-input-wrapper-init>
-                     <input
+                    <input
                       value={email}
-                      onChange={(e)=>setEmail(e.target.value)}
+                      onChange={(e) => setEmail(e.target.value)}
                       type="email"
                       className="peer block min-h-[auto] w-full rounded border border-gray-300 bg-transparent px-3 py-[0.32rem] leading-[2.15] text-black outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary motion-reduce:transition-none dark:text-black dark:placeholder:text-neutral-300"
                       id="email"
@@ -65,7 +72,6 @@ const navigate = useNavigate()
                     <label
                       htmlFor="email"
                       className="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[2.15] text-neutral-500 transition-all duration-200 ease-out opacity-0 peer-focus:opacity-100 peer-focus:-translate-y-[1.6rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[twe-input-state-active]:opacity-100 peer-data-[twe-input-state-active]:-translate-y-[1.6rem] peer-data-[twe-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-400 dark:peer-focus:text-primary"
-
                     >
                       Email address
                     </label>
@@ -73,8 +79,8 @@ const navigate = useNavigate()
 
                   <div className="relative mb-6" data-twe-input-wrapper-init>
                     <input
-                    value={password}
-                    onChange={(e)=> setPassword(e.target.value)}
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
                       type="password"
                       className="peer block min-h-[auto] w-full rounded border border-gray-300 bg-transparent px-3 py-[0.32rem] leading-[2.15] text-black outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary motion-reduce:transition-none dark:text-black dark:placeholder:text-neutral-300"
                       id="password"
@@ -83,11 +89,9 @@ const navigate = useNavigate()
                     <label
                       htmlFor="password"
                       className="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[2.15] text-neutral-500 transition-all duration-200 ease-out opacity-0 peer-focus:opacity-100 peer-focus:-translate-y-[1.6rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[twe-input-state-active]:opacity-100 peer-data-[twe-input-state-active]:-translate-y-[1.6rem] peer-data-[twe-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-400 dark:peer-focus:text-primary"
-
                     >
                       Password
                     </label>
-                   
                   </div>
 
                   <div className="mb-6 flex items-center justify-between">
@@ -98,7 +102,7 @@ const navigate = useNavigate()
                         value=""
                         id="exampleCheck3"
                         checked={checked}
-                        onChange={(e)=>setChecked(e.target.checked)}
+                        onChange={(e) => setChecked(e.target.checked)}
                       />
                       <label
                         className="inline-block ps-[0.15rem] hover:cursor-pointer"
@@ -117,7 +121,6 @@ const navigate = useNavigate()
                   </div>
 
                   <button
-                  
                     type="submit"
                     className="inline-block w-full rounded bg-black px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white transition duration-150 ease-in-out hover:bg-gray-900 focus:outline-none focus:ring-0"
                   >
