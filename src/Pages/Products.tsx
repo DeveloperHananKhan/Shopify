@@ -7,6 +7,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 import { useUserCart } from "../Store/Cart";
 import type { Product } from "../types/data";
 import { useUser } from "../API/User";
+import { Link } from "react-router-dom";
 
 export const AllProducts = () => {
   const { dat, loading } = useData();
@@ -52,15 +53,18 @@ const handleAddToCart = (product: Product) => {
       ) : (
         <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  p-10">
           {dat.map((product) => (
+            
             <div
               key={product.id}
               className="border rounded-lg p-4 shadow hover:shadow-lg transition"
-            >
+            >  
+            <Link to={`/viewPage/${product.id}`}>
               <img
                 src={product.image}
                 alt={product.title}
                 className="h-40 w-full object-contain mb-4"
               />
+               </Link>
               <h3 className="text-sm font-medium text-gray-700">
                 {product.title}
               </h3>
@@ -79,6 +83,7 @@ const handleAddToCart = (product: Product) => {
                         Add to Cart 
                       </button>
             </div>
+           
           ))}
         </div>
       )}

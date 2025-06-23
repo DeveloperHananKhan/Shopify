@@ -10,6 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { Wallet } from "./Pages/Wallet";
 import { CheckOut } from "./Pages/Checkout";
 import { ContactUs } from "./Pages/Contact";
+import { ViewPage } from "./Pages/ViewPage";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Route path="/wallet" element={<Wallet/>} />
         <Route path="/checkOut" element={<CheckOut/>} />
         <Route path="/contactUs" element={<ContactUs/>} />
+        <Route path="/viewPage/:productId" element={<ViewPage />} />
 
       </Routes>
     </>
