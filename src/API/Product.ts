@@ -5,7 +5,7 @@ export const useData = () =>{
 
       const [dat, setDat] = useState<Product[]>([]);
       const [loading,setLoading]=useState(true)
-      const API = "https://fakestoreapi.com/products";
+      const API = "https://fakestoreapi.com/products/";
     
       const productData = async () => {
         try {

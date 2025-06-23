@@ -68,22 +68,25 @@ export const Home = () => {
                   </div>
                 ))
               : dat.slice(0, 8).map((product) => (
+                
                   <div
                     key={product.id}
                     className="border rounded-lg p-4 shadow hover:shadow-lg transition"
                   >
+                    < Link to={`/viewPage/${product.id}`}>
                     <img
                       src={product.image}
                       alt={product.title}
                       className="h-40 w-full object-contain mb-4"
                     />
+                    </Link>
                     <h3 className="text-sm font-medium text-gray-700">
                       {product.title}
                     </h3>
                     <p className="text-gray-900 font-semibold">
                       ${product.price}
                     </p>
-
+                        
                     <button onClick={()=>handleAddToCart(product) } className="flex justify-self-end bg-gray-100 text-gray-900 hover:bg-gray-200 px-4 py-2 rounded flex items-center gap-2">
                       {" "}
                       <svg
@@ -98,6 +101,7 @@ export const Home = () => {
                     </button>
                    
                   </div>
+                 
                 ))}
           </div>
 
