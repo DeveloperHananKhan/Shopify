@@ -11,6 +11,9 @@ import { Wallet } from "./Pages/Wallet";
 import { CheckOut } from "./Pages/Checkout";
 import { ContactUs } from "./Pages/Contact";
 import { ViewPage } from "./Pages/ViewPage";
+import { SearchPage } from "./Pages/searchPage";
+import { Favourite } from "./Pages/favourite";
+import { Dashboard } from "./Pages/Dashboard";
 
 function App() {
   return (
@@ -28,7 +31,10 @@ function App() {
         <Route path="/checkOut" element={<CheckOut/>} />
         <Route path="/contactUs" element={<ContactUs/>} />
         <Route path="/viewPage/:productId" element={<ViewPage />} />
-
+        <Route path="/search"  element={<SearchPage />} />
+        <Route path="/wishlist" element={<Favourite />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        
       </Routes>
     </>
   );

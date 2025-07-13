@@ -1,6 +1,9 @@
 import { Navbar } from "../components/navbar";
 import { Footer } from "../components/footer";
 export const ContactUs = () => {
+
+
+  
   return (<>
     <Navbar />
     <div className="min-h-screen bg-white text-gray-800 px-6 py-12">

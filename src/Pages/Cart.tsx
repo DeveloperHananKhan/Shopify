@@ -4,12 +4,16 @@ import { useUserCart } from "../Store/Cart";
 import { useUser } from "../API/User";
 import { Link } from "react-router-dom";
 
+
 export const Cart = () => {
   const { items, addQuantity, subQuantity, removeProduct } = useUserCart();
+   
   const { user } = useUser();
   const totalCount = useUserCart((state) => state.totalCount());
   const totalAmount = useUserCart((state) => state.totalAmount());
 
+ 
+ 
   return (
     <>
       <Navbar />
@@ -48,7 +52,7 @@ export const Cart = () => {
                       className="flex flex-col sm:flex-row items-center gap-4 border-b pb-4"
                     >
                       <img
-                        src={item.image}
+                        src={item.thumbnail}
                         alt={item.title}
                         className="w-20 h-20 rounded-sm object-cover"
                       />
