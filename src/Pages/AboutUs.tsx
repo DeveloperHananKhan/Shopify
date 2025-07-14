@@ -8,10 +8,10 @@ export const AboutUs = () => {
     <>
       <Navbar />
 
-      <div className="min-h-screen bg-white text-gray-800 px-6 py-12">
+      <div className="min-h-screen bg-white text-gray-800 px-6 py-12 dark:bg-gray-800">
         <div className="max-w-6xl mx-auto">
-          <h1 className="text-4xl font-bold mb-6 text-center">About Us</h1>
-          <p className="text-lg text-center text-gray-600 max-w-3xl mx-auto mb-12">
+          <h1 className="text-4xl font-bold mb-6 text-center dark:text-white">About Us</h1>
+          <p className="text-lg text-center text-gray-600 max-w-3xl mx-auto mb-12 dark:text-white">
             Welcome to <span className="font-semibold text-black">Shopify</span>
             , your number one destination for the best quality products. Our
             mission is to simplify online shopping by providing a seamless and
@@ -26,14 +26,14 @@ export const AboutUs = () => {
             />
 
             <div>
-              <h2 className="text-2xl font-semibold mb-4">Who We Are</h2>
-              <p className="text-gray-600 mb-4">
+              <h2 className="text-2xl font-semibold mb-4 dark:text-white">Who We Are</h2>
+              <p className="text-gray-600 mb-4 dark:text-white">
                 We are a team of passionate individuals committed to creating a
                 better shopping experience. Whether you're looking for fashion,
                 gadgets, or everyday essentials, we’ve got you covered.
               </p>
-              <h2 className="text-2xl font-semibold mb-4">Why Choose Us?</h2>
-              <ul className="list-disc list-inside text-gray-600 space-y-2">
+              <h2 className="text-2xl font-semibold mb-4 dark:text-white">Why Choose Us?</h2>
+              <ul className="list-disc list-inside text-gray-600 space-y-2 dark:text-white">
                 <li>Trusted by 10,000+ customers</li>
                 <li>Fast and secure checkout</li>
                 <li>24/7 customer support</li>
@@ -43,13 +43,13 @@ export const AboutUs = () => {
           </div>
 
           <div className="mt-16 text-center">
-            <h2 className="text-2xl font-semibold mb-2">Join Our Journey</h2>
-            <p className="text-gray-600 mb-4">
+            <h2 className="text-2xl font-semibold mb-2 dark:text-white">Join Our Journey</h2>
+            <p className="text-gray-600 mb-4 dark:text-white">
               We’re on a mission to change the way you shop online. Be a part of
               it.
             </p>
             <Link to="/products">
-              <button className="px-6 py-2 bg-black text-white rounded hover:bg-gray-800 transition">
+              <button className="px-6 py-2 bg-black text-white rounded hover:bg-gray-800 transition dark:bg-gray-300 dark:text-gray-900 dark:hover:bg-gray-400 px-4 py-2 rounded transition">
                 Explore Our Products
               </button>
             </Link>

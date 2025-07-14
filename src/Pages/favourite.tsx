@@ -36,12 +36,10 @@ export const Favourite = () => {
   return (
     <>
       <Navbar />
-      {favourites.length === 0 ? (
-        <div className="text-center text-gray-500 text-lg py-10 h-[300px]">
-          You have no favourites yet.
-        </div>
-      ) : (
-        <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  p-10">
+      {user && favourites.length > 0 ? (
+
+
+<div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  p-10">
           {favourites.map((p: Product) => (
             <div
               key={p.id}
@@ -73,6 +71,11 @@ export const Favourite = () => {
               </button>
             </div>
           ))}
+        </div>
+        
+      ) : (
+        <div className="text-center text-gray-500 text-lg py-10 h-[300px]">
+          You have no favourites yet.
         </div>
       )}
       <Footer />

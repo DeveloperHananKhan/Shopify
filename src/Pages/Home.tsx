@@ -97,9 +97,9 @@ export const Home = () => {
 
       <hr className="my-8 border-t border-gray-300" />
 
-      <section className="bg-white py-12">
+      <section className="bg-white py-12 dark:bg-gray-800">
         <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">
+          <h2 className="text-2xl font-bold text-gray-900 mb-6 dark:text-white">
             Featured Products
           </h2>
 
@@ -127,10 +127,10 @@ export const Home = () => {
                         className="h-40 w-full object-contain mb-4"
                       />
                     </Link>
-                    <h3 className="text-sm font-medium text-gray-700">
+                    <h3 className="text-sm font-medium text-gray-700 dark:text-white">
                       {product.title}
                     </h3>
-                    <p className="text-gray-900 font-semibold">
+                    <p className="text-gray-900 font-semibold dark:text-green-400 ">
                       ${product.price}
                     </p>
 
@@ -140,7 +140,7 @@ export const Home = () => {
                           xmlns="http://www.w3.org/2000/svg"
                           fill="currentColor"
                           viewBox="0 0 24 24"
-                          className="w-5 h-5 text-gray-900"
+                          className="w-5 h-5 text-gray-900 dark:text-gray-300"
                         >
                           <path
                             d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5
@@ -153,14 +153,14 @@ export const Home = () => {
                       </button>
                       <button
                         onClick={() => handleAddToCart(product)}
-                        className="flex justify-self-end bg-gray-100 text-gray-900 hover:bg-gray-200 px-4 py-2 rounded flex items-center gap-2"
+                        className="flex justify-self-end bg-gray-100 text-gray-900 hover:bg-gray-200 px-4 py-2 rounded flex items-center gap-2 dark:bg-gray-700 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-600"
                       >
                         {" "}
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           viewBox="0 0 24 24"
                           fill="currentColor"
-                          className="w-5 h-5 text-gray-900"
+                          className="w-5 h-5 text-gray-900 dark:text-gray-300"
                         >
                           <path d="M2.25 2.25a.75.75 0 000 1.5h1.386c.17 0 .318.114.362.278l2.558 9.592a3.752 3.752 0 00-2.806 3.63c0 .414.336.75.75.75h15.75a.75.75 0 000-1.5H5.378A2.25 2.25 0 017.5 15h11.218a.75.75 0 00.674-.421 60.358 60.358 0 002.96-7.228.75.75 0 00-.525-.965A60.864 60.864 0 005.68 4.509l-.232-.867A1.875 1.875 0 003.636 2.25H2.25zM3.75 20.25a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM16.5 20.25a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z" />
                         </svg>
@@ -174,7 +174,7 @@ export const Home = () => {
           {!loading && (
             <div className="text-center mt-8">
               <Link to="/products">
-                <button className="px-6 py-2 bg-black text-white rounded hover:bg-gray-800">
+                <button className="px-6 py-2 bg-black text-white rounded hover:bg-gray-800  dark:bg-gray-300 dark:text-gray-900 dark:hover:bg-gray-400 px-4 py-2 rounded transition">
                   View All Products
                 </button>
               </Link>

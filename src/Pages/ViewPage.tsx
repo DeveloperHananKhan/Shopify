@@ -97,14 +97,14 @@ export const ViewPage = () => {
             </div>
 
             <div className="space-y-6">
-              <h1 className="text-3xl font-bold text-gray-800">
+              <h1 className="text-3xl font-bold text-gray-800 dark:text-white">
                 {product.title}
               </h1>
-              <p className="text-sm text-gray-500">{product.category}</p>
+              <p className="text-sm text-gray-500 dark:text-white">{product.category}</p>
               <p className="text-xl text-green-600 font-semibold">
                 ${product.price.toFixed(2)}
               </p>
-              <p className="text-gray-700">{product.description}</p>
+              <p className="text-gray-700 dark:text-gray-300">{product.description}</p>
 
               {user && <div className="flex items-center gap-2">
                   <button
@@ -130,7 +130,7 @@ export const ViewPage = () => {
               
                 <button
                   onClick={() => handleAddToCart(product)}
-                  className="mt-4 inline-block bg-black text-white px-6 py-3 rounded hover:bg-gray-800 transition"
+                  className="mt-4 inline-block bg-black text-white px-6 py-3 rounded hover:bg-gray-800 transition dark:bg-gray-700 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-600"
                 >
                   Add to Cart
                 </button>
