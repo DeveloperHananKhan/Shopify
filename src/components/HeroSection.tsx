@@ -13,7 +13,7 @@ export const HeroSection = () => {
         <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:items-center">
             <div>
-              <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl dark: text-white">
+              <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl dark:text-white">
                 Step Into Style with Confidence
               </h2>
               <p className="mt-4 text-gray-600 dark:text-white">
