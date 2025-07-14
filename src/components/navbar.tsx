@@ -1,16 +1,28 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useSearchStore } from "../Store/Search";
 import { useUser } from "../API/User";
 import { useState } from "react";
 import { useUserCart } from "../Store/Cart";
 import { useWalletStore } from "../Store/Wallet";
+import { useWishList } from "../Store/favorites";
+import { useThemeStore } from "../Store/themeMode";
 export const Navbar = () => {
+  const navigate = useNavigate();
+  const { query, setQuery, fetchProducts } = useSearchStore();
   const totalCount = useUserCart((state) => state.totalCount());
   const [isOpen, setOpen] = useState(false);
   const { user } = useUser();
   const { balance } = useWalletStore();
+  const { theme, toggleTheme } = useThemeStore();
+  const total = useWishList((state) => state.favourites.length);
+  const handleSearch = () => {
+    if (query.trim()) {
+      navigate(`/search?query=${encodeURIComponent(query.trim())}`);
+    }
+  };
   return (
     <>
-      <nav className="relative flex w-full items-center justify-between bg-white text-gray-800 shadow-md py-2 dark:bg-gray-900 dark:text-white lg:flex-wrap lg:justify-start lg:py-4">
+      <nav className="relative flex w-full items-center justify-between bg-white text-gray-800 shadow-md py-2 dark:bg-gray-800 dark:text-white lg:flex-wrap lg:justify-start lg:py-4 ">
         <div className="flex w-full flex-wrap items-center justify-between px-3">
           <button
             onClick={() => setOpen(!isOpen)}
@@ -72,15 +84,15 @@ export const Navbar = () => {
                   </span>
                 </li>
               </Link>
-               <Link to='/contactUs'>
-              <li className="mb-4 lg:mb-0 lg:pe-2" data-twe-nav-item-ref>
-                <span
-                  className="text-black/60 transition duration-200 hover:text-black/80 hover:ease-in-out focus:text-black/80 active:text-black/80 motion-reduce:transition-none dark:text-white/60 dark:hover:text-white/80 dark:focus:text-white/80 dark:active:text-white/80 lg:px-2"
-                  data-twe-nav-link-ref
-                >
-                  Contact
-                </span>
-              </li>
+              <Link to="/contactUs">
+                <li className="mb-4 lg:mb-0 lg:pe-2" data-twe-nav-item-ref>
+                  <span
+                    className="text-black/60 transition duration-200 hover:text-black/80 hover:ease-in-out focus:text-black/80 active:text-black/80 motion-reduce:transition-none dark:text-white/60 dark:hover:text-white/80 dark:focus:text-white/80 dark:active:text-white/80 lg:px-2"
+                    data-twe-nav-link-ref
+                  >
+                    Contact
+                  </span>
+                </li>
               </Link>
             </ul>
           </div>
@@ -89,6 +101,19 @@ export const Navbar = () => {
             <div className="flex flex-1 min-w-[180px] max-w-full sm:max-w-sm md:max-w-md lg:max-w-[300px] items-center justify-between mr-2">
               <input
                 type="search"
+                value={query}
+                onChange={(e) => {
+                  const val = e.target.value;
+                  setQuery(val);
+                  if (val === "") {
+                    fetchProducts();
+                  }
+                }}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    fetchProducts();
+                  }
+                }}
                 className="block w-full rounded border border-secondary-500 bg-transparent px-3 py-1.5 text-sm text-gray-800 placeholder:text-white focus:border-primary focus:outline-none dark:border-white/10 dark:bg-body-dark dark:text-white dark:placeholder:text-neutral-400"
                 placeholder="Search"
                 aria-label="Search"
@@ -99,6 +124,7 @@ export const Navbar = () => {
                 id="button-addon2"
               >
                 <svg
+                  onClick={handleSearch}
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 20 20"
                   fill="currentColor"
@@ -111,6 +137,66 @@ export const Navbar = () => {
                 </svg>
               </span>
             </div>
+            <button
+              onClick={() => toggleTheme(theme === "light" ? "dark" : "light")}
+              className={`w-9 h-9 flex items-center justify-center rounded-full border shadow-sm transition-colors duration-300
+    ${
+      theme === "light"
+        ? "bg-white text-yellow-500 border-gray-300 hover:bg-gray-100 hover:shadow-md"
+        : "bg-gray-800 text-blue-300 border-gray-600 hover:bg-gray-700 hover:shadow-md"
+    }
+  `}
+              aria-label="Toggle Theme"
+            >
+              {theme === "light" ? (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-5 h-5"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M12 18a6 6 0 100-12 6 6 0 000 12z" />
+                  <path
+                    fillRule="evenodd"
+                    d="M12 2.25a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zm0 16.5a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5a.75.75 0 01.75-.75zM4.22 4.22a.75.75 0 011.06 0l1.06 1.06a.75.75 0 11-1.06 1.06L4.22 5.28a.75.75 0 010-1.06zM17.66 17.66a.75.75 0 011.06 0l1.06 1.06a.75.75 0 11-1.06 1.06l-1.06-1.06a.75.75 0 010-1.06zM2.25 12a.75.75 0 01.75-.75h1.5a.75.75 0 010 1.5H3a.75.75 0 01-.75-.75zm16.5 0a.75.75 0 01.75-.75h1.5a.75.75 0 010 1.5H19.5a.75.75 0 01-.75-.75zM4.22 19.78a.75.75 0 010-1.06l1.06-1.06a.75.75 0 111.06 1.06L5.28 19.78a.75.75 0 01-1.06 0zM17.66 6.34a.75.75 0 010-1.06l1.06-1.06a.75.75 0 111.06 1.06l-1.06 1.06a.75.75 0 01-1.06 0z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              ) : (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-5 h-5"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z" />
+                </svg>
+              )}
+            </button>
+
+            <Link to="/wishlist">
+              <div className="ms-2 flex items-center text-gray-600 dark:text-white [&>svg]:w-5 mr-4 relative ">
+                {user && total > 0 && (
+                  <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center animate-bounce">
+                    {total}
+                  </span>
+                )}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                  className="w-5 h-5 text-neutral-600 dark:text-white hover:text-blue-500"
+                >
+                  <path
+                    d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5
+    2 5.42 4.42 3 7.5 3c1.74 0 3.41 0.81 4.5 2.09
+    C13.09 3.81 14.76 3 16.5 3
+    19.58 3 22 5.42 22 8.5
+    c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+                  />
+                </svg>
+              </div>
+            </Link>
 
             <span className="me-4 text-neutral-600 dark:text-white">
               <Link to="/cart">
@@ -161,7 +247,7 @@ export const Navbar = () => {
                 <div className="absolute top-full mt-2 right-0 mr-2 whitespace-nowrap bg-white text-black text-sm px-4 py-2 rounded-md shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-50 border border-gray-200">
                   <p className="font-medium mb-2">Wallet Balance</p>
                   <p className="text-green-500 font-bold ">
-                   {user ? `$${balance.toFixed(2)}` : "$00.00"}
+                    {user ? `$${balance.toFixed(2)}` : "$00.00"}
                   </p>
                 </div>
               </span>

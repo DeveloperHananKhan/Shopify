@@ -1,22 +1,23 @@
+export interface ProductResponse {
+  products: Product[];
+}
 export interface Product {
-  
-    id: number;
+  id: number;
   title: string;
   price: number;
-  description?: any;
+  description?: string;
   category: string;
-  image: string;
-
+  thumbnail: string;
+ 
 }
 
 export interface User {
-  token:string;
+  token: string;
 }
 export interface UserDetail {
-id : number;
-email: string;
-firstName : string;
-lastName : string;
-avatar: string;
-
+  id: number;
+  email: string;
+  firstName: string;
+  lastName: string;
+  avatar: string;
 }

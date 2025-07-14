@@ -4,8 +4,11 @@ import { toast } from "react-toastify";
 import { Navbar } from "../components/navbar";
 import { Footer } from "../components/footer";
 import { useNavigate } from "react-router";
+
 export const CheckOut = () => {
   const navigate = useNavigate();
+
+   
 
   const { items, totalAmount, removeProduct } = useUserCart();
   const { balance, reduceAmount } = useWalletStore();
@@ -29,6 +32,9 @@ export const CheckOut = () => {
       }, 2000);
     }
   };
+    
+  
+ 
   return (
     <>
       <Navbar />

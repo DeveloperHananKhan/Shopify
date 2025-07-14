@@ -4,12 +4,16 @@ import { useUserCart } from "../Store/Cart";
 import { useUser } from "../API/User";
 import { Link } from "react-router-dom";
 
+
 export const Cart = () => {
   const { items, addQuantity, subQuantity, removeProduct } = useUserCart();
+   
   const { user } = useUser();
   const totalCount = useUserCart((state) => state.totalCount());
   const totalAmount = useUserCart((state) => state.totalAmount());
 
+ 
+ 
   return (
     <>
       <Navbar />
@@ -17,7 +21,7 @@ export const Cart = () => {
         <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-3xl">
             <header className="text-center mb-6">
-              <h1 className="text-2xl font-bold text-gray-900 sm:text-3xl">Your Cart</h1>
+              <h1 className="text-2xl font-bold text-gray-900 sm:text-3xl dark:text-white">Your Cart</h1>
             </header>
 
             {!user ? (
@@ -48,14 +52,14 @@ export const Cart = () => {
                       className="flex flex-col sm:flex-row items-center gap-4 border-b pb-4"
                     >
                       <img
-                        src={item.image}
+                        src={item.thumbnail}
                         alt={item.title}
                         className="w-20 h-20 rounded-sm object-cover"
                       />
 
                       <div className="flex-1 w-full">
-                        <h3 className="text-sm font-semibold text-gray-900">{item.title}</h3>
-                        <p className="text-xs text-gray-500">${item.price.toFixed(2)}</p>
+                        <h3 className="text-sm font-semibold text-gray-900  dark:text-white">{item.title}</h3>
+                        <p className="text-xs text-gray-500  dark:text-gray-300">${item.price.toFixed(2)}</p>
                       </div>
 
                       <div className="flex items-center gap-2">
@@ -90,19 +94,19 @@ export const Cart = () => {
                 </ul>
 
                 <div className="mt-10 border-t pt-6">
-                  <div className="flex justify-between text-sm text-gray-700 mb-2">
+                  <div className="flex justify-between text-sm text-gray-700 mb-2  dark:text-gray-300">
                     <span>Items in cart:</span>
                     <span>{totalCount}</span>
                   </div>
                   <div className="flex justify-between text-base font-bold text-gray-900">
-                    <span>Total:</span>
-                    <span>${totalAmount.toFixed(2)}</span>
+                    <span className="dark:text-gray-300">Total:</span>
+                    <span className="dark:text-green-400">${totalAmount.toFixed(2)}</span>
                   </div>
 
                   <div className="mt-6 text-right">
                     <Link to="/checkOut">
                     <button
-                      className="bg-gray-800 hover:bg-gray-700 px-6 py-3 text-white rounded-sm text-sm transition"
+                      className="bg-gray-800 hover:bg-gray-700 px-6 py-3 text-white rounded-sm text-sm transition dark:bg-gray-700 dark:text-white hover:bg-gray200 dark:hover:bg-gray-600"
                     >
                       Checkout
                     </button>
